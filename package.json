@@ -1,38 +1,39 @@
 {
-  "name": "fasttrackblogapi",
+  "name": "fasttrack-blog-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Blog API with CRUD, Auth, and Comments",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SimanyeSTS/FastTrackBlogAPI.git"
-  },
-  "keywords": [],
+  "keywords": [
+    "fastify",
+    "blog",
+    "api",
+    "typescript",
+    "prisma"
+  ],
   "author": "",
-  "license": "ISC",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/SimanyeSTS/FastTrackBlogAPI/issues"
-  },
-  "homepage": "https://github.com/SimanyeSTS/FastTrackBlogAPI#readme",
+  "license": "MIT",
   "dependencies": {
-    "@fastify/cors": "^11.1.0",
-    "@fastify/jwt": "^10.0.0",
-    "@prisma/client": "^6.19.0",
-    "bcryptjs": "^3.0.3",
-    "dotenv": "^17.2.3",
-    "fastify": "^5.6.2",
-    "zod-to-json-schema": "^3.24.6"
+    "@fastify/cors": "^9.0.1",
+    "@fastify/jwt": "^8.0.0",
+    "@fastify/static": "^6.12.0",
+    "@prisma/client": "^5.9.1",
+    "bcryptjs": "^2.4.3",
+    "fastify": "^4.26.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
-    "@types/node": "^24.10.0",
-    "nodemon": "^3.1.11",
-    "prisma": "^6.19.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "@types/node": "^20.19.25",
+    "prisma": "^5.9.1",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
   }
 }

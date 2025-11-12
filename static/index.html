@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastTrack Blog API - Documentation</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 FastTrack Blog API</h1>
+            <p class="subtitle">A production-ready REST API built with Fastify, TypeScript, Prisma & PostgreSQL</p>
+            <div class="status">
+                <span class="status-badge" id="status">Checking...</span>
+                <span class="base-url">Base URL: <code>http://localhost:3000</code></span>
+            </div>
+        </header>
+
+        <section class="features">
+            <div class="feature">
+                <span class="icon">🔐</span>
+                <h3>Authentication</h3>
+                <p>JWT-based auth with bcrypt password hashing</p>
+            </div>
+            <div class="feature">
+                <span class="icon">📝</span>
+                <h3>Blog Posts</h3>
+                <p>Full CRUD operations with authorization</p>
+            </div>
+            <div class="feature">
+                <span class="icon">💬</span>
+                <h3>Comments</h3>
+                <p>Nested comments system with user relations</p>
+            </div>
+            <div class="feature">
+                <span class="icon">⚡</span>
+                <h3>High Performance</h3>
+                <p>Built with Fastify for speed and efficiency</p>
+            </div>
+        </section>
+
+        <section class="endpoints">
+            <h2>API Endpoints</h2>
+
+            <!-- Authentication Endpoints -->
+            <div class="endpoint-group">
+                <h3>🔐 Authentication</h3>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="path">/api/auth/register</span>
+                        <span class="badge public">Public</span>
+                    </div>
+                    <p class="description">Register a new user account</p>
+                    <div class="code-block">
+                        <pre>{
+  "email": "user@example.com",
+  "password": "password123",
+  "name": "John Doe"
+}</pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="path">/api/auth/login</span>
+                        <span class="badge public">Public</span>
+                    </div>
+                    <p class="description">Login and receive JWT token</p>
+                    <div class="code-block">
+                        <pre>{
+  "email": "user@example.com",
+  "password": "password123"
+}</pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="path">/api/auth/me</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Get current authenticated user details</p>
+                    <div class="code-block">
+                        <pre>Authorization: Bearer &lt;your-jwt-token&gt;</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posts Endpoints -->
+            <div class="endpoint-group">
+                <h3>📝 Blog Posts</h3>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="path">/api/posts</span>
+                        <span class="badge public">Public</span>
+                    </div>
+                    <p class="description">Get all published blog posts</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="path">/api/posts/:id</span>
+                        <span class="badge public">Public</span>
+                    </div>
+                    <p class="description">Get a single post with all comments</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="path">/api/posts</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Create a new blog post</p>
+                    <div class="code-block">
+                        <pre>{
+  "title": "My Blog Post",
+  "content": "Post content here...",
+  "published": true
+}</pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method put">PUT</span>
+                        <span class="path">/api/posts/:id</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Update your own post</p>
+                    <div class="code-block">
+                        <pre>{
+  "title": "Updated Title",
+  "content": "Updated content",
+  "published": false
+}</pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method delete">DELETE</span>
+                        <span class="path">/api/posts/:id</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Delete your own post (cascade deletes comments)</p>
+                </div>
+            </div>
+
+            <!-- Comments Endpoints -->
+            <div class="endpoint-group">
+                <h3>💬 Comments</h3>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="path">/api/comments/post/:postId</span>
+                        <span class="badge public">Public</span>
+                    </div>
+                    <p class="description">Get all comments for a specific post</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="path">/api/comments</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Create a comment on a post</p>
+                    <div class="code-block">
+                        <pre>{
+  "text": "Great post!",
+  "postId": 1
+}</pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method put">PUT</span>
+                        <span class="path">/api/comments/:id</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Update your own comment</p>
+                    <div class="code-block">
+                        <pre>{
+  "text": "Updated comment text"
+}</pre>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method delete">DELETE</span>
+                        <span class="path">/api/comments/:id</span>
+                        <span class="badge protected">Protected</span>
+                    </div>
+                    <p class="description">Delete your own comment</p>
+                </div>
+            </div>
+
+            <!-- Health Check -->
+            <div class="endpoint-group">
+                <h3>🏥 System</h3>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="path">/health</span>
+                        <span class="badge public">Public</span>
+                    </div>
+                    <p class="description">API health check endpoint</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-start">
+            <h2>Quick Start</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Register an Account</h4>
+                        <code>POST /api/auth/register</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Get Your Token</h4>
+                        <code>POST /api/auth/login</code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Make Authenticated Requests</h4>
+                        <code>Authorization: Bearer &lt;token&gt;</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Built with ❤️ for TiptopCA Backend Developer Application</p>
+            <p class="tech-stack">
+                <span>Fastify</span> • 
+                <span>TypeScript</span> • 
+                <span>Prisma</span> • 
+                <span>PostgreSQL</span> • 
+                <span>JWT</span>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Check API health status
+        async function checkHealth() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                const statusBadge = document.getElementById('status');
+                
+                if (data.status === 'ok') {
+                    statusBadge.textContent = '✅ API Online';
+                    statusBadge.className = 'status-badge online';
+                } else {
+                    statusBadge.textContent = '❌ API Offline';
+                    statusBadge.className = 'status-badge offline';
+                }
+            } catch (error) {
+                const statusBadge = document.getElementById('status');
+                statusBadge.textContent = '❌ API Offline';
+                statusBadge.className = 'status-badge offline';
+            }
+        }
+
+        // Check on load
+        checkHealth();
+        
+        // Recheck every 30 seconds
+        setInterval(checkHealth, 30000);
+    </script>
+</body>
+</html>
